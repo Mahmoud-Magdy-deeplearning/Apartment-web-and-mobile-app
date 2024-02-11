@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Apartment } from './apartment.entity';
@@ -34,8 +38,12 @@ export class ApartmentsService {
   }
 
   async create(createApartmentDto: CreateApartmentDto): Promise<Apartment> {
-    const apartment = this.apartmentRepository.create(createApartmentDto);
-    return this.apartmentRepository.save(apartment);
+    try {
+      const apartment = this.apartmentRepository.create(createApartmentDto);
+      return await this.apartmentRepository.save(apartment);
+    } catch (error) {
+      throw new BadRequestException(error.message);
+    }
   }
 
   async findById(id: number): Promise<Apartment> {
