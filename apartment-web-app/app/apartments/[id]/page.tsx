@@ -11,7 +11,7 @@ import { IoIosPricetag } from "react-icons/io";
 
 export default async function page({ params }: { params: { id: string } }) {
   const apartmentJson = await fetch(
-    `${process.env.BACKEND_URL!}/apartments/${params.id}`
+    `http://localhost:5000/apartments/${params.id}`, { cache: 'no-store' }
   );
   const apartmentData = await apartmentJson.json();
 

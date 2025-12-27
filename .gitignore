@@ -2,3 +2,5 @@ apartment-mobile-app/.env
 apartment-web-app/.env
 apartment-server/.env
 apartment-server/node_modules
+apartment-web-app/dist
+apartment-server/dist
